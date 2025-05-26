@@ -53,7 +53,7 @@ function App() {
             <nav className="space-x-6 text-blue-700 text-lg font-medium">
               <Link to="/" className="hover:underline">Profiles</Link>
               <Link to="/admin" className="hover:underline">Admin</Link>
-              <Link to="/create" className="hover:underline">Create Profile</Link> 
+              <Link to="/create" className="hover:underline">Create</Link> 
             </nav>
           </div>
         </header>
