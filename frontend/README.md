@@ -18,7 +18,7 @@ A responsive React web application to view, search, and manage user profiles wit
 
 1. Clone the repository:
    ```sh
-   git clone <your-repo-url>
+   git clone `https://github.com/vikas-dev-123/CaseStudy.git`
    ```
 
 2. Install dependencies:
