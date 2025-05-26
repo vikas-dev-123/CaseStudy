@@ -55,7 +55,11 @@ function App() {
             <nav className="space-x-6 text-white text-lg font-medium hidden md:flex">
               <Link to="/" className="hover:underline">Profiles</Link>
               <Link to="/admin" className="hover:underline">Admin</Link>
+<<<<<<< HEAD
               <Link to="/create" className="hover:underline">Create Profile</Link>
+=======
+              <Link to="/create" className="hover:underline">Create</Link> 
+>>>>>>> 8a44628788fae41997d7a0cb518ffb831619d16c
             </nav>
             {/* Mobile Menu Icon */}
             <button
