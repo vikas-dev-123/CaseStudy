@@ -7,7 +7,7 @@ import ProfileDetails from './components/ProfileDetails';
 import AdminPanel from './components/AdminPannel';
 import MapView from './components/MapView';
 import LoadingSpinner from './components/LoadingSpinner';
-import CreateProfile from './components/CreateProfile'; // Import CreateProfile
+import CreateProfile from './components/CreateProfile';
 
 function App() {
   // Initial profiles data 
@@ -20,6 +20,7 @@ function App() {
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [mapError, setMapError] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // On profiles change, save to localStorage
   useEffect(() => {
@@ -27,35 +28,73 @@ function App() {
   }, [profiles]);
 
   // Show map modal with loading simulation
- const showMap = (profile) => {
-  setLoading(true);
-  setTimeout(() => {
-    setSelectedProfile(profile);  
-    setLoading(false);
-    setMapError(null);
-  }, 500); 
- }
+  const showMap = (profile) => {
+    setLoading(true);
+    setTimeout(() => {
+      setSelectedProfile(profile);  
+      setLoading(false);
+      setMapError(null);
+    }, 500); 
+  };
 
   const closeMap = () => {
-  setSelectedProfile(null);
-  setMapError(null);
-};
+    setSelectedProfile(null);
+    setMapError(null);
+  };
 
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
+      <div className="min-h-screen bg-black text-white">
         {/* Header */}
-        <header className="bg-white shadow sticky top-0 z-40">
+        <header className="bg-gray-900 shadow sticky top-0 z-40">
           <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-            <Link to="/" className="text-2xl font-bold text-blue-700 hover:text-blue-900">
+            <Link to="/" className="text-2xl font-bold text-white hover:text-blue-400">
               ProfileMapApp
             </Link>
-            <nav className="space-x-6 text-blue-700 text-lg font-medium">
+            {/* Desktop Nav */}
+            <nav className="space-x-6 text-white text-lg font-medium hidden md:flex">
               <Link to="/" className="hover:underline">Profiles</Link>
               <Link to="/admin" className="hover:underline">Admin</Link>
-              <Link to="/create" className="hover:underline">Create Profile</Link> 
+              <Link to="/create" className="hover:underline">Create Profile</Link>
             </nav>
+            {/* Mobile Menu Icon */}
+            <button
+              className="md:hidden text-white focus:outline-none"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Open menu"
+            >
+              {/* Hamburger Icon */}
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
+          {/* Mobile Nav Dropdown */}
+          {menuOpen && (
+            <div className="md:hidden bg-gray-900 border-t border-gray-700 px-6 py-2 space-y-2">
+              <Link
+                to="/"
+                className="block text-white text-lg font-medium hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                Profiles
+              </Link>
+              <Link
+                to="/admin"
+                className="block text-white text-lg font-medium hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                Admin
+              </Link>
+              <Link
+                to="/create"
+                className="block text-white text-lg font-medium hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                Create Profile
+              </Link>
+            </div>
+          )}
         </header>
 
         {/* Main content */}
@@ -73,7 +112,7 @@ function App() {
           {loading && (
             <motion.div
               key="loading"
-              className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50"
+              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -95,7 +134,7 @@ function App() {
           {mapError && !loading && (
             <motion.div
               key="mapError"
-              className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded shadow-lg z-50"
+              className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-red-900 border border-red-400 text-white px-6 py-4 rounded shadow-lg z-50"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
@@ -104,7 +143,7 @@ function App() {
                 <p>{mapError}</p>
                 <button
                   onClick={() => setMapError(null)}
-                  className="font-bold text-red-700 hover:text-red-900"
+                  className="font-bold text-white hover:text-red-300"
                   aria-label="Close error message"
                 >
                   &times;

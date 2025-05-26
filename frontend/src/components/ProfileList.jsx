@@ -19,20 +19,35 @@ const ProfileList = ({ profiles, onShowMap }) => {
   });
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-8" aria-label="Profile listing">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">User Profiles</h1>
+    <section
+      className="max-w-6xl mx-auto px-4 py-10 min-h-screen"
+      aria-label="Profile listing"
+      style={{
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+        borderRadius: '1.5rem',
+        boxShadow: '0 8px 32px 0 rgba(31,38,135,0.37)',
+      }}
+    >
+      <h1 className="text-3xl font-bold text-center mb-8"
+        style={{
+          color: 'rgba(200, 255, 255, 0.85)', 
+          textShadow: '0 2px 8px #000, 0 1px 0 #fff2'
+        }}
+      >
+        User Profiles
+      </h1>
       <div className="flex flex-col md:flex-row md:space-x-4 mb-6 justify-center">
         <input
           type="search"
           aria-label="Search profiles by name"
           placeholder="Search by name..."
-          className="border border-gray-300 rounded-md px-4 py-2 mb-3 md:mb-0 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-blue-700 bg-black bg-opacity-70 text-blue-200 rounded-md px-4 py-2 mb-3 md:mb-0 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
         />
         <select
           aria-label="Filter profiles by location"
-          className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-blue-700 bg-black bg-opacity-70 text-blue-200 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           value={filterLocation}
           onChange={e => setFilterLocation(e.target.value)}
         >
@@ -49,7 +64,7 @@ const ProfileList = ({ profiles, onShowMap }) => {
         {filteredProfiles.length > 0 ? (
           <motion.div
             layout
-            className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             role="list"
           >
             {filteredProfiles.map(profile => (
@@ -61,7 +76,13 @@ const ProfileList = ({ profiles, onShowMap }) => {
             ))}
           </motion.div>
         ) : (
-          <p className="text-center text-gray-500 mt-12">No profiles found.</p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center text-blue-300 mt-12 text-lg"
+          >
+            No profiles found.
+          </motion.p>
         )}
       </AnimatePresence>
     </section>

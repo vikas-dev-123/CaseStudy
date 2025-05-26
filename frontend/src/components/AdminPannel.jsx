@@ -111,22 +111,22 @@ const AdminPanel = ({ profiles, setProfiles }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Admin Panel - Manage Profiles</h1>
+    <div className="max-w-4xl mx-auto p-6 bg-black min-h-screen text-white">
+      <h1 className="text-3xl font-bold text-center mb-6 text-white">Admin Panel - Manage Profiles</h1>
       <button
         onClick={() => {
           setEditingProfile(null);
           resetForm();
           navigate('/admin');
         }}
-        className="mb-6 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+        className="mb-6 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
       >
         Add New Profile
       </button>
 
       <div className="mb-8">
         {profiles.length === 0 ? (
-          <p className="text-center text-gray-500">No profiles available.</p>
+          <p className="text-center text-gray-400">No profiles available.</p>
         ) : (
           <div className="space-y-4" role="list">
             {profiles.map(profile => (
@@ -135,7 +135,7 @@ const AdminPanel = ({ profiles, setProfiles }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="flex items-center justify-between bg-white rounded-lg shadow p-3"
+                className="flex items-center justify-between bg-gray-900 rounded-lg shadow p-3"
                 role="listitem"
                 aria-label={`Admin profile row for ${profile.name}`}
               >
@@ -143,23 +143,23 @@ const AdminPanel = ({ profiles, setProfiles }) => {
                   <img
                     src={profile.photo}
                     alt={`Profile photo of ${profile.name}`}
-                    className="w-16 h-16 rounded-full object-cover"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-gray-700"
                   />
                   <div>
-                    <h3 className="font-semibold text-gray-800">{profile.name}</h3>
-                    <p className="text-sm text-gray-600">{profile.address.formatted}</p>
+                    <h3 className="font-semibold text-white">{profile.name}</h3>
+                    <p className="text-sm text-gray-400">{profile.address.formatted}</p>
                   </div>
                 </div>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => handleEditClick(profile)}
-                    className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    className="px-3 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDeleteClick(profile.id)}
-                    className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition focus:outline-none focus:ring-2 focus:ring-red-400"
+                    className="px-3 py-1 bg-red-700 text-white rounded hover:bg-red-800 transition focus:outline-none focus:ring-2 focus:ring-red-400"
                   >
                     Delete
                   </button>
@@ -173,18 +173,18 @@ const AdminPanel = ({ profiles, setProfiles }) => {
       <section aria-label={editingProfile ? 'Edit profile form' : 'Add new profile form'}>
         <h2 className="text-2xl font-semibold mb-4">{editingProfile ? 'Edit Profile' : 'Add New Profile'}</h2>
         {error && (
-          <p className="text-red-600 font-semibold bg-red-100 p-2 rounded mb-4">{error}</p>
+          <p className="text-red-400 font-semibold bg-red-900 p-2 rounded mb-4">{error}</p>
         )}
         <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
           <div>
-            <label htmlFor="name" className="block font-medium mb-1">
-              Name <span className="text-red-600">*</span>
+            <label htmlFor="name" className="block font-medium mb-1 text-white">
+              Name <span className="text-red-400">*</span>
             </label>
             <input
               id="name"
               name="name"
               type="text"
-              className="w-full border border-gray-300 rounded px-3 py-2"
+              className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
               value={formData.name}
               onChange={handleInputChange}
               required
@@ -193,14 +193,14 @@ const AdminPanel = ({ profiles, setProfiles }) => {
           </div>
 
           <div>
-            <label htmlFor="photo" className="block font-medium mb-1">
-              Photo URL <span className="text-red-600">*</span>
+            <label htmlFor="photo" className="block font-medium mb-1 text-white">
+              Photo URL <span className="text-red-400">*</span>
             </label>
             <input
               id="photo"
               name="photo"
               type="url"
-              className="w-full border border-gray-300 rounded px-3 py-2"
+              className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
               value={formData.photo}
               onChange={handleInputChange}
               required
@@ -209,14 +209,14 @@ const AdminPanel = ({ profiles, setProfiles }) => {
           </div>
 
           <div>
-            <label htmlFor="description" className="block font-medium mb-1">
-              Description <span className="text-red-600">*</span>
+            <label htmlFor="description" className="block font-medium mb-1 text-white">
+              Description <span className="text-red-400">*</span>
             </label>
             <textarea
               id="description"
               name="description"
               rows="3"
-              className="w-full border border-gray-300 rounded px-3 py-2"
+              className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
               value={formData.description}
               onChange={handleInputChange}
               required
@@ -226,15 +226,15 @@ const AdminPanel = ({ profiles, setProfiles }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label htmlFor="lat" className="block font-medium mb-1">
-                Latitude <span className="text-red-600">*</span>
+              <label htmlFor="lat" className="block font-medium mb-1 text-white">
+                Latitude <span className="text-red-400">*</span>
               </label>
               <input
                 id="lat"
                 name="lat"
                 type="number"
                 step="any"
-                className="w-full border border-gray-300 rounded px-3 py-2"
+                className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
                 value={formData.lat}
                 onChange={handleInputChange}
                 required
@@ -242,15 +242,15 @@ const AdminPanel = ({ profiles, setProfiles }) => {
               />
             </div>
             <div>
-              <label htmlFor="lng" className="block font-medium mb-1">
-                Longitude <span className="text-red-600">*</span>
+              <label htmlFor="lng" className="block font-medium mb-1 text-white">
+                Longitude <span className="text-red-400">*</span>
               </label>
               <input
                 id="lng"
                 name="lng"
                 type="number"
                 step="any"
-                className="w-full border border-gray-300 rounded px-3 py-2"
+                className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
                 value={formData.lng}
                 onChange={handleInputChange}
                 required
@@ -258,14 +258,14 @@ const AdminPanel = ({ profiles, setProfiles }) => {
               />
             </div>
             <div>
-              <label htmlFor="formatted" className="block font-medium mb-1">
-                Formatted Address <span className="text-red-600">*</span>
+              <label htmlFor="formatted" className="block font-medium mb-1 text-white">
+                Formatted Address <span className="text-red-400">*</span>
               </label>
               <input
                 id="formatted"
                 name="formatted"
                 type="text"
-                className="w-full border border-gray-300 rounded px-3 py-2"
+                className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
                 value={formData.formatted}
                 onChange={handleInputChange}
                 required
@@ -275,14 +275,14 @@ const AdminPanel = ({ profiles, setProfiles }) => {
           </div>
 
           <div>
-            <label htmlFor="contact" className="block font-medium mb-1">
-              Contact Email <span className="text-red-600">*</span>
+            <label htmlFor="contact" className="block font-medium mb-1 text-white">
+              Contact Email <span className="text-red-400">*</span>
             </label>
             <input
               id="contact"
               name="contact"
               type="email"
-              className="w-full border border-gray-300 rounded px-3 py-2"
+              className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
               value={formData.contact}
               onChange={handleInputChange}
               required
@@ -291,14 +291,14 @@ const AdminPanel = ({ profiles, setProfiles }) => {
           </div>
 
           <div>
-            <label htmlFor="interests" className="block font-medium mb-1">
+            <label htmlFor="interests" className="block font-medium mb-1 text-white">
               Interests (comma separated)
             </label>
             <input
               id="interests"
               name="interests"
               type="text"
-              className="w-full border border-gray-300 rounded px-3 py-2"
+              className="w-full border border-gray-700 bg-gray-900 text-white rounded px-3 py-2"
               value={formData.interests}
               onChange={handleInputChange}
             />
@@ -307,14 +307,14 @@ const AdminPanel = ({ profiles, setProfiles }) => {
           <div className="flex space-x-4">
             <button
               type="submit"
-              className="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-5 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {editingProfile ? 'Update Profile' : 'Add Profile'}
             </button>
             {editingProfile && (
               <button
                 type="button"
-                className="px-5 py-2 bg-gray-300 rounded hover:bg-gray-400 transition focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="px-5 py-2 bg-gray-700 text-white rounded hover:bg-gray-800 transition focus:outline-none focus:ring-2 focus:ring-gray-400"
                 onClick={() => {
                   setEditingProfile(null);
                   resetForm();
